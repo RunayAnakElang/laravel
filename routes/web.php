@@ -23,12 +23,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/createcategory', [KontenController::class, 'createcategory'])->name('createcategory');
     Route::post('/createcategory', [KontenController::class, 'storecategory'])->name('storecategory');
     Route::get('/createquestion', [KontenController::class, 'createquestion'])->name('createquestion');
-    Route::post('/createquestion', [KontenController::class, 'storeimage'])->name('reiki');
+    Route::post('/createquestion/image', [KontenController::class, 'storeimage'])->name('reiki');
     Route::post('/createquestion', [KontenController::class, 'storequestion'])->name('storequestion');
     Route::put('/updatecategory/{id}',[KontenController::class,'updatecategory']);
     Route::delete('/categorydelete/{id}',[KontenController::class,'destroy']);
     Route::get('/profile', [KontenController::class,'profile'])->name('profile');
     Route::put('/users/{id}', [KontenController::class,'profileupdate'])->name('profileyuh');
+    Route::get('/profile', [KontenController::class,'profile'])->name('profile');
+    Route::get('/showquestion/{id}', [KontenController::class,'showquestion'])->name('show.questiom');
 
 });
 Auth::routes();

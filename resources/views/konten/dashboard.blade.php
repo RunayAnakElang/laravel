@@ -20,12 +20,13 @@
                 <th scope="row">1</th>
                 <td>Mark</td>
                 <td>Otto</td>
-                <td>@mdo</td>
+
               </tr>
               @foreach ($question as $b)
               <tr>
 
                   <td>{!! $b->question !!}</td>
+                  <td><a href="/showquestion/{{ $b->id }}" class="btn btn-danger">update question</a></td>
               </tr>
               @endforeach
             </tbody>

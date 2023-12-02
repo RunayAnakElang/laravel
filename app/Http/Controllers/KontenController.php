@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\question;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -12,17 +13,17 @@ class KontenController extends Controller
 {
     public function index()
     {
-        $question = DB::table('question')->get();
+        $question = DB::table('questions')->get();
         return view('konten.dashboard',['question' => $question]);
     }
     public function createcategory()
     {
-        $kategori = DB::table('kategori')->where('user_id', Auth::id())->get();
+        $kategori = DB::table('kategoris')->where('user_id', Auth::id())->get();
         return view('konten.category',['kategori' => $kategori]);
     }
     public function createquestion()
     {
-        $kategori = DB::table('kategori')->where('user_id', Auth::id())->get();
+        $kategori = DB::table('kategoris')->where('user_id', Auth::id())->get();
         return view('konten.question', ['kategori' => $kategori]);
     }
     public function storecategory(Request $request)
@@ -31,7 +32,7 @@ class KontenController extends Controller
             'nama_kategori' => 'required|min:4'
         ]);
         $userId = Auth::id();
-        DB::table('kategori')->insert([
+        DB::table('kategoris')->insert([
             //sebelah kiri table sebalah kanan name
             'nama_kategori' => $request->nama_kategori,
             'user_id' => $userId
@@ -47,7 +48,7 @@ class KontenController extends Controller
 
         $userId = Auth::id();
 
-        DB::table('question')->insert([
+        DB::table('questions')->insert([
             //sebelah kiri table sebalah kanan name
             'question' => $request->question,
             'user_id' => $userId,
@@ -88,14 +89,14 @@ class KontenController extends Controller
         }
         public function destroy($id)
         {
-            DB::table('kategori')->where('id', '=', $id)->delete();
+            DB::table('kategoris')->where('id', '=', $id)->delete();
             return redirect('/createcategory');
         }
         public function updatecategory($id,Request $request)  {
             $request->validate([
                 'nama_kategori' => 'required'
             ]);
-             DB::table('kategori')
+             DB::table('kategoris')
                   ->where('id', $id)
                   ->update([
                     'nama_kategori' => $request->input('nama_kategori'),
@@ -127,5 +128,12 @@ class KontenController extends Controller
 
         return view('konten.profile',['users'=>$users]);
     }
+    public function showquestion($id)  {
+        // $question = DB::table('questions')->find($id);
+        $question = question::find($id);
+        $kategori = DB::table('kategoris')->get();
+        return view('konten.updatequestion',['question'=>$question],['kategori'=>$kategori]);
     }
+    }
+
 

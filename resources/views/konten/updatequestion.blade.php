@@ -19,13 +19,12 @@
                 <label for="exampleFormControlTextarea1">textarea</label>
                 <textarea class="form-control" name="question" id="exampleFormControlTextarea1" rows="3"></textarea>
               </div>
-          <select class="form-select form-select-sm" id="kategori_dropdown" name="kategori" aria-label="Small select example">
-            <option selected>Category</option>
-            @foreach ( $kategori as $b )
-            <option value="{{ $b->id }}">{{ $b->nama_kategori }} mdksnde</option>
-            @endforeach
-          </select>
-          {{ $kategori }}
+            <select class="form-select form-select-sm" id="kategori_dropdown" name="kategori" aria-label="Small select example">
+                <option selected>{{ $question }}</option>
+                @foreach ( $kategori as $b )
+                <option value="{{ $b->id }}">{{ $b->nama_kategori }}</option>
+                @endforeach
+              </select>
           <textarea id="post_text" name="post_text" class="post-area"></textarea>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
