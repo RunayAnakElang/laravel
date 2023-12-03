@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class kategori extends Model
 {
-    public function question()
+    public function questions()
     {
-        return $this->hasMany(Question::class);
+        return $this->hasMany(question::class, 'id_kategori');
     }
     use HasFactory;
 }

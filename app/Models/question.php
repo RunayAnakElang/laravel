@@ -10,7 +10,7 @@ class question extends Model
 
     public function kategori()
     {
-        return $this->belongsTo(kategori::class);
+        return $this->belongsTo(kategori::class, 'id_kategori');
     }
     use HasFactory;
 }

@@ -130,7 +130,9 @@ class KontenController extends Controller
     }
     public function showquestion($id)  {
         // $question = DB::table('questions')->find($id);
-        $question = question::find($id);
+
+        $question = question::with('kategori')->where('id', $id)->first();
+
         $kategori = DB::table('kategoris')->get();
         return view('konten.updatequestion',['question'=>$question],['kategori'=>$kategori]);
     }
